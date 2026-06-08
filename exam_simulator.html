@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS7 Algorithm Design and Problem Solving — Cambridge IGCSE Computer Science Study Guide — Exam Simulator</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #f5f7fa; color: #1a1a1a; line-height: 1.6; }
+  .header { background: #1a3c5e; color: white; padding: 20px; text-align: center; position: sticky; top: 0; z-index: 100; }
+  .header h1 { font-size: 22px; }
+  .timer { font-size: 28px; font-weight: 700; margin-top: 8px; font-variant-numeric: tabular-nums; }
+  .timer.warning { color: #ff9800; }
+  .timer.danger { color: #ff4444; animation: pulse 1s infinite; }
+  @keyframes pulse { 50% { opacity: 0.5; } }
+  .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+  .exam-info {
+    background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-align: center;
+  }
+  .exam-info .stat { display: inline-block; margin: 0 16px; }
+  .exam-info .stat-val { font-size: 24px; font-weight: 700; color: #2a5f8f; }
+  .exam-info .stat-label { font-size: 12px; color: #888; }
+  .q-card {
+    background: white; border-radius: 12px; padding: 24px; margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .q-card .q-header { display: flex; justify-content: space-between; margin-bottom: 12px; }
+  .q-card .q-num { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+  .q-card .q-marks { font-size: 12px; color: #2a5f8f; font-weight: 600; }
+  .q-card .q-text { font-size: 16px; margin-bottom: 12px; }
+  .q-card textarea {
+    width: 100%; min-height: 100px; padding: 12px; border: 2px solid #e0e0e0;
+    border-radius: 8px; font-family: inherit; font-size: 14px; resize: vertical;
+  }
+  .q-card textarea:focus { border-color: #2a5f8f; outline: none; }
+  .answer-reveal {
+    margin-top: 12px; padding: 12px 16px; background: #f0faf0;
+    border-left: 3px solid #2d8a4e; border-radius: 4px; font-size: 14px;
+    display: none; white-space: pre-wrap;
+  }
+  .answer-reveal.show { display: block; }
+  .controls { text-align: center; margin: 24px 0; }
+  .controls button {
+    padding: 12px 32px; border: none; border-radius: 8px; font-size: 16px;
+    font-weight: 600; cursor: pointer; margin: 0 8px;
+  }
+  .btn-start { background: #2a5f8f; color: white; }
+  .btn-start:hover { background: #1a3c5e; }
+  .btn-submit { background: #2d8a4e; color: white; }
+  .btn-submit:hover { background: #1d6a3e; }
+  .btn-show { background: #e0e0e0; color: #333; }
+  .btn-show:hover { background: #d0d0d0; }
+  .hidden { display: none; }
+  .results {
+    background: white; border-radius: 12px; padding: 32px; text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .results h2 { font-size: 28px; margin-bottom: 16px; }
+  .results .time-taken { font-size: 18px; color: #555; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>CS7 Algorithm Design and Problem Solving — Cambridge IGCSE Computer Science Study Guide — Exam Simulator</h1>
+  <div class="timer" id="timer">--:--</div>
+</div>
+<div class="container">
+  <div class="exam-info" id="examInfo">
+    <div class="stat"><div class="stat-val" id="totalQ">-</div><div class="stat-label">Questions</div></div>
+    <div class="stat"><div class="stat-val" id="totalM">-</div><div class="stat-label">Total Marks</div></div>
+    <div class="stat"><div class="stat-val" id="timeLimit">-</div><div class="stat-label">Minutes</div></div>
+    <div style="margin-top:16px;">
+      <button class="btn-start" id="btnStart" onclick="startExam()">Start Exam</button>
+    </div>
+  </div>
+  <div id="questionsArea" class="hidden"></div>
+  <div id="submitArea" class="hidden controls">
+    <button class="btn-submit" onclick="submitExam()">Submit &amp; View Answers</button>
+  </div>
+  <div id="resultsArea" class="hidden"></div>
+</div>
+<script>
+const EXAM = {"title": "CS7 Algorithm Design and Problem Solving \u2014 Cambridge IGCSE Computer Science Study Guide", "timeMinutes": 45, "questions": [{"id": "Question CS7.01", "question": "What are the four stages of the program development life cycle?", "answer": "The four stages are: (1) Analysis \u2014 the problem is explored and requirements identified; (2) Design \u2014 algorithms are planned using structure diagrams, flowcharts, and pseudocode; (3) Coding \u2014 the program is written in a programming language; (4) Testing \u2014 the program is tested to ensure it works correctly and meets requirements.", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question CS7.02", "question": "Define the term &#x27;decomposition&#x27; and explain why it is used in the analysis stage.", "answer": "Decomposition is the process of splitting a problem or system into smaller subproblems or sub-systems. It is used in the analysis stage because it allows developers to identify the requirements for each component part separately, making complex problems more manageable. Each subproblem can then be implemented as a subprogram.", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question CS7.03", "question": "Describe the purpose of pseudocode and give one rule for writing valid pseudocode.", "answer": "Pseudocode is used to plan algorithms in a readable, code-like format that all programmers can understand and translate into any programming language. A rule for valid pseudocode is that it must use programming constructs such as IF, WHILE, FOR, INPUT, and OUTPUT \u2014 it should not be written in plain natural language that cannot be directly converted to code.", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question CS7.04", "question": "Identify four different types of test data and give an example of each for a program that accepts numbers between 1 and 50.", "answer": "(1) Normal data: any number between 1 and 50 (e.g., 25); (2) Abnormal data: data outside the range or wrong type (e.g., 0, 51, &quot;hello&quot;); (3) Extreme data: data at the very edge of the valid range (e.g., 1 and 50); (4) Boundary data: data on both sides of the limits (e.g., 0 and 1 at the lower bound, 50 and 51 at the upper bound).", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question CS7.05", "question": "Explain how a linear search algorithm works.", "answer": "A linear search checks each item in a set of data one at a time, starting from the first item. It compares each item with the search value. If the item matches, the search is complete and the position is reported. If the item does not match, the algorithm moves to the next item. The search continues until the item is found or all items have been checked without finding a match.", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question CS7.06", "question": "Describe how a bubble sort works and state the two conditions for stopping.", "answer": "A bubble sort compares the first two adjacent values; if they are in the wrong order, it swaps them. It then moves to the next pair (values 2 and 3) and repeats. This continues until the end of the list, completing one pass. The algorithm stops when either: (1) it has completed (length \u2212 1) passes through the list, or (2) it has completed a full pass without making any swaps, meaning the data is already sorted.", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question CS7.07", "question": "Explain the difference between the two versions of the bubble sort algorithm in terms of efficiency.", "answer": "Version 1 always runs (length \u2212 1) passes regardless of whether the data is already sorted, making it less efficient. Version 2 uses a flag variable to track whether any swaps were made during a pass; if no swaps occur, the algorithm stops early because the data is already in order. Version 2 is more efficient because it avoids unnecessary passes through already-sorted data.", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question CS7.08", "question": "Write a pseudocode algorithm to find the total and average of 10 numbers input by a user.", "answer": "```\nTotal \u2190 0\nFOR X \u2190 0 TO 9\n    Number \u2190 INPUT(&quot;Enter a number&quot;)\n    Total \u2190 Total + Number\nNEXT X\nAverage \u2190 Total / 10\nOUTPUT &quot;Total: &quot;, Total\nOUTPUT &quot;Average: &quot;, Average\n```", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question CS7.09", "question": "Explain the difference between totalling and counting.", "answer": "Totalling is adding a group of values together to get a sum (e.g., Total \u2190 Total + Value). Counting is tracking how many items there are by incrementing a counter by 1 each time (e.g., Count \u2190 Count + 1). Totalling accumulates the actual values, while counting simply tracks the number of occurrences.", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question CS7.10", "question": "Describe how you would find the minimum value from a set of numbers using an algorithm.", "answer": "To find the minimum: (1) Initialise a minimum variable to a very large value (e.g., Minimum \u2190 9999). (2) Compare each input number to the current minimum. (3) If the number is smaller than the current minimum, replace the minimum with that number (Minimum \u2190 Number). (4) After all numbers have been checked, the minimum variable holds the smallest value.", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question CS7.11", "question": "What is validation? Give three examples of validation checks.", "answer": "Validation is the checking of data that is input to make sure it is reasonable and within set bounds. Three examples are: (1) Range check \u2014 ensures data is within specified bounds (e.g., age between 0 and 100); (2) Length check \u2014 ensures a string has the required number of characters (e.g., password at least 8 characters); (3) Type check \u2014 ensures data is the correct data type (e.g., checking input is an integer, not a string).", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question CS7.12", "question": "Explain the difference between validation and verification.", "answer": "Validation checks that data input is reasonable and within set bounds (e.g., an age must be between 0 and 100). Verification checks that data has been copied accurately from the original source (e.g., matching a typed entry to a paper form). Validation ensures data is sensible; verification ensures data has been entered correctly. However, verification only confirms accurate copying \u2014 the original data may still be incorrect.", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question CS7.13", "question": "Describe the two types of verification checks.", "answer": "(1) Visual check \u2014 the user compares the data entered on screen to the original source (e.g., reading each line from a paper copy and checking it matches what is on the computer). (2) Double entry check \u2014 the same data is entered twice, usually by different people, and the computer checks whether there are any differences between the two entries.", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question CS7.14", "question": "What is a trace table and what is it used for?", "answer": "A trace table is a structure used to follow an algorithm manually by recording the values of each variable at each step of execution. It is used to: (1) dry run an algorithm to see what it does with specific input data; (2) find the purpose of an unknown algorithm; and (3) find errors in an algorithm by comparing the actual output to the expected output.", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question CS7.15", "question": "Describe the steps for creating a trace table from an algorithm.", "answer": "(1) Identify all variables in the algorithm \u2014 each gets its own column. (2) Add an OUTPUT column if the program produces output. (3) Read through the algorithm one line at a time, starting from the first line. (4) When a variable&#x27;s value changes, write the new value below the previous value in that variable&#x27;s column. (5) For loops, go back to the loop condition when reaching the end of the loop body. (6) Record outputs exactly as they appear in the code.", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question CS7.16", "question": "Perform a linear search for the number 6 in the following data: 10 5 6 8 1 2. Show each comparison.", "answer": "Compare 10 with 6 \u2014 not the same. Compare 5 with 6 \u2014 not the same. Compare 6 with 6 \u2014 they are the same. The number 6 is found at position 3 (index 2). Three comparisons were needed.", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question CS7.17", "question": "A program allows the user to input a number between 1 and 10 (inclusive). Identify test data for each of the four test data types.", "answer": "Normal: any number from 1 to 10 (e.g., 5). Abnormal: a value outside the range or wrong type (e.g., 0, 11, &quot;abc&quot;, 3.5). Extreme: the boundary values that should be accepted (1 and 10). Boundary: values on both sides of each boundary (0 and 1 at the lower end, 10 and 11 at the upper end).", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question CS7.18", "question": "Write a pseudocode validation routine using a WHILE loop to input a number and check it is between 1 and 100 inclusive.", "answer": "```\nNumber \u2190 INPUT(&quot;Enter a number between 1 and 100&quot;)\nWHILE Number &lt; 1 OR Number &gt; 100 DO\n    OUTPUT(&quot;Invalid, please try again&quot;)\n    Number \u2190 INPUT(&quot;Enter a number between 1 and 100&quot;)\nENDWHILE\nOUTPUT(&quot;Valid&quot;)\n```", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question CS7.19", "question": "A program stores a number for a user to guess. The user has up to 10 attempts. After each turn the program outputs whether their guess is smaller, larger, or equal. Identify the inputs, processes, and outputs.", "answer": "Inputs: the stored number, the user&#x27;s guess each turn. Processes: compare the guess to the stored number, count the number of attempts, check if the guess is correct or if 10 attempts have been used. Outputs: &quot;too small&quot;, &quot;too large&quot;, or &quot;correct&quot; after each guess, the number of attempts if correct, and the answer if all 10 guesses are used.", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question CS7.20", "question": "Identify which validation rule this algorithm uses: INPUT Num; IF Num &gt; 0 AND Num &lt; 100 THEN OUTPUT &quot;Valid&quot; ELSE OUTPUT &quot;Invalid&quot; ENDIF.", "answer": "This algorithm uses a range check. It validates that the input number is within the range of greater than 0 and less than 100. Any value outside this range is rejected as invalid.\n\n---\n\n## Key Formulas and Concepts\n\n1. Average = Total / Count\n2. Bubble sort maximum passes = Length of array \u2212 1\n3. Linear search worst case comparisons = Length of array (item not found)\n4. Totalling pattern: Total \u2190 0, then Total \u2190 Total + Value (inside loop)\n5. Counting pattern: Count \u2190 0, then Count \u2190 Count + 1 (inside loop)\n6. Finding minimum: Initialise Minimum \u2190 large value, then IF Number &lt; Minimum THEN Minimum \u2190 Number\n7. Finding maximum: Initialise Maximum \u2190 small value, then IF Number &gt; Maximum THEN Maximum \u2190 Number\n8. Bubble sort swap pattern: Temp \u2190 A, A \u2190 B, B \u2190 Temp (three-variable swap)\n9. SUBST", "marks": 2, "hasImage": false, "imagePath": null}], "totalMarks": 40};
+let timerInterval = null;
+let secondsLeft = 0;
+let startTime = null;
+
+document.getElementById('totalQ').textContent = EXAM.questions.length;
+document.getElementById('totalM').textContent = EXAM.totalMarks;
+document.getElementById('timeLimit').textContent = EXAM.timeMinutes;
+
+function startExam() {
+  document.getElementById('btnStart').classList.add('hidden');
+  document.getElementById('questionsArea').classList.remove('hidden');
+  document.getElementById('submitArea').classList.remove('hidden');
+  secondsLeft = EXAM.timeMinutes * 60;
+  startTime = Date.now();
+  renderQuestions();
+  timerInterval = setInterval(tick, 1000);
+  tick();
+}
+
+function tick() {
+  secondsLeft--;
+  const m = Math.floor(secondsLeft / 60);
+  const s = secondsLeft % 60;
+  const el = document.getElementById('timer');
+  el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  el.className = 'timer' + (secondsLeft < 300 ? (secondsLeft < 60 ? ' danger' : ' warning') : '');
+  if (secondsLeft <= 0) { clearInterval(timerInterval); submitExam(); }
+}
+
+function renderQuestions() {
+  const area = document.getElementById('questionsArea');
+  area.innerHTML = '';
+  EXAM.questions.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'q-card';
+    div.innerHTML = `
+      <div class="q-header">
+        <span class="q-num">Question ${i+1} — ${q.id}</span>
+        <span class="q-marks">[${q.marks} marks]</span>
+      </div>
+      <div class="q-text">${q.question}</div>
+      <textarea id="ans_${i}" placeholder="Write your answer here..."></textarea>
+      <div class="answer-reveal" id="reveal_${i}"><b>Model Answer:</b><br>${q.answer}</div>
+    `;
+    area.appendChild(div);
+  });
+}
+
+function submitExam() {
+  clearInterval(timerInterval);
+  const elapsed = Math.round((Date.now() - startTime) / 1000);
+  const m = Math.floor(elapsed / 60);
+  const s = elapsed % 60;
+
+  document.getElementById('submitArea').classList.add('hidden');
+  document.querySelectorAll('.answer-reveal').forEach(el => el.classList.add('show'));
+  document.querySelectorAll('textarea').forEach(el => el.disabled = true);
+  document.getElementById('timer').textContent = 'DONE';
+  document.getElementById('timer').className = 'timer';
+
+  const results = document.getElementById('resultsArea');
+  results.classList.remove('hidden');
+  results.innerHTML = `
+    <div class="results">
+      <h2>Exam Complete</h2>
+      <div class="time-taken">Time taken: ${m}m ${s}s</div>
+      <p style="margin-top:12px;color:#555;">Model answers shown below each question. Review your responses.</p>
+    </div>
+  `;
+
+  try {
+    const sessions = JSON.parse(localStorage.getItem('sf_exam_sessions') || '[]');
+    sessions.push({ date: new Date().toISOString(), questions: EXAM.questions.length, totalMarks: EXAM.totalMarks, timeSec: elapsed });
+    localStorage.setItem('sf_exam_sessions', JSON.stringify(sessions));
+  } catch(e) {}
+}
+</script>
+</body>
+</html>

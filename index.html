@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>StudyForge Study Guide</title>
+<meta charset="UTF-8">
+<style>
+  @page {
+    size: A4;
+    margin: 1.5cm 1.8cm;
+  }
+  body {
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.4;
+    color: #000000;
+  }
+  h1 {
+    font-size: 20pt;
+    color: #000000;
+    border-bottom: 2px solid #1a3c5e;
+    padding-bottom: 4px;
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-size: 15pt;
+    color: #000000;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 3px;
+    margin-top: 16px;
+    margin-bottom: 6px;
+  }
+  h3 {
+    font-size: 12pt;
+    color: #000000;
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+  h4 {
+    font-size: 11pt;
+    color: #000000;
+    margin-top: 10px;
+    margin-bottom: 4px;
+  }
+  p { margin: 4px 0; }
+  strong { color: #000000; }
+  ul, ol { margin: 4px 0 4px 18px; padding: 0; }
+  li { margin-bottom: 2px; }
+  code {
+    background: #f0f4f8;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-size: 9.5pt;
+  }
+  blockquote {
+    border-left: 3px solid #2a5f8f;
+    margin: 6px 0;
+    padding: 6px 14px;
+    background: #f8fafc;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 6px 0;
+    font-size: 10.5pt;
+  }
+  th, td {
+    border: 1px solid #999;
+    padding: 4px 6px;
+    text-align: left;
+  }
+  th {
+    background: #2a5f8f;
+    color: white;
+  }
+  tr:nth-child(even) { background: #f8fafc; }
+  hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+  }
+  .cover {
+    text-align: center;
+    padding-top: 60px;
+    page-break-after: always;
+  }
+  .cover h1 {
+    font-size: 32pt;
+    border: none;
+    color: #000000;
+    margin-bottom: 8px;
+  }
+  .cover .subtitle {
+    font-size: 16pt;
+    color: #333333;
+    margin-top: 6px;
+  }
+  .cover .meta {
+    font-size: 11pt;
+    color: #555555;
+    margin-top: 30px;
+  }
+  img {
+    max-width: 50%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 4px 0;
+    display: block;
+  }
+  .figure {
+    text-align: center;
+    margin: 8px 0;
+    page-break-inside: avoid;
+  }
+  .figure img {
+    margin: 0 auto 4px auto;
+    max-width: 50%;
+  }
+  .figure-caption {
+    font-size: 9pt;
+    color: #333333;
+    font-style: italic;
+    margin-top: 2px;
+  }
+</style>
+</head>
+<body>
+<div style="position:sticky;top:0;background:#1a3c5e;color:white;padding:10px 20px;text-align:center;z-index:999;font-family:Arial,sans-serif;font-size:14px;">StudyForge &mdash; <a href="study_guide.pdf" download style="color:white;text-decoration:underline;font-weight:bold;">PDF</a> &middot; <a href="study_guide.mp4" download style="color:white;text-decoration:underline;">Video</a> &middot; <a href="quiz.html" style="color:white;text-decoration:underline;">Interactive Quiz</a> &middot; <a href="cheat_sheet.pdf" style="color:white;text-decoration:underline;">Cheat Sheet</a> &middot; <a href="exam_simulator.html" style="color:white;text-decoration:underline;">Exam Simulator</a></div>
+<div class="cover">
+  <h1>StudyForge</h1>
+  <div class="subtitle"></div>
+  <div class="subtitle">CS7 Computer Science</div>
+  <div class="meta">Pages </div>
+  <div class="meta">Comprehensive Exam Preparation Guide</div>
+</div>
+<h1>CS7 Algorithm Design and Problem Solving — Cambridge IGCSE Computer Science Study Guide</h1>
+
+<h2>7.1 Program Development Life Cycle</h2>
+
+<p>The <strong>program development life cycle</strong> is a structured, organised plan used when creating a new computer program. There are several varieties of life cycle models, including cyclic, spiral, waterfall, and rapid development. All models include the following four stages:</p>
+
+<ol>
+  <li><strong>Analysis</strong> — The problem is explored, requirements are identified, and the problem is decomposed into subproblems.</li>
+  <li><strong>Design</strong> — Algorithms are planned using structure diagrams, flowcharts, and pseudocode.</li>
+  <li><strong>Coding</strong> — The program is written in a chosen programming language, with iterative testing during development.</li>
+  <li><strong>Testing</strong> — The finished program is tested to ensure it fully works, does not crash, and meets all requirements.</li>
+</ol>
+
+<h2>7.2 Analysis and Decomposition</h2>
+
+<p><strong>Decomposition</strong> is used to split a problem into smaller subproblems during the analysis stage. Each subproblem can then be tackled separately and implemented as a subprogram. This makes complex problems more manageable and allows different team members to work on different parts.</p>
+
+<p>Key steps in analysis:</p>
+<ul>
+  <li>Explore the problem and identify requirements</li>
+  <li>Use decomposition to break the problem into component parts</li>
+  <li>Identify inputs, processes, and outputs for each subproblem</li>
+</ul>
+
+<h2>7.3 Design — Structure Diagrams</h2>
+
+<p>A <strong>structure diagram</strong> is developed by decomposing a program into its subprograms. The diagram has the name of the program at the top, and below it are its subprograms. Each subprogram can be split down further as needed.</p>
+
+<p><strong>How to create a structure diagram:</strong></p>
+<ol>
+  <li>Place the program name at the top</li>
+  <li>Identify the main subprograms (e.g. Input, Process, Output)</li>
+  <li>Break each subprogram into smaller components</li>
+  <li>Continue decomposing until each box represents a single, programmable task</li>
+</ol>
+
+<p><strong>Example — Calculator:</strong></p>
+<ul>
+  <li>Top level: Calculator</li>
+  <li>Second level: Input, Process, Output</li>
+  <li>Input breaks into: Input number1, Input symbol, Input number2</li>
+  <li>Process: number1 symbol number2</li>
+  <li>Output: Output answer</li>
+</ul>
+
+<p><strong>Example — Chess Game:</strong></p>
+<ul>
+  <li>Top level: Chess</li>
+  <li>Second level: New players, New game, Make move, Check won</li>
+  <li>Each breaks down further into specific tasks (e.g., Make move → Output player's turn, Input piece, Input move, Check move valid, Move piece)</li>
+</ul>
+
+<h2>7.4 Pseudocode</h2>
+
+<p><strong>Pseudocode</strong> is any code that is not written on a computer to run. It uses keywords and constructs such as IF statements, WHILE loops, FOR loops, INPUT, and OUTPUT. It is a readable, code-like representation that all programmers can understand and translate into any programming language.</p>
+
+<p><strong>Key rules for valid pseudocode:</strong></p>
+<ul>
+  <li>Use programming constructs (IF, WHILE, FOR, INPUT, OUTPUT)</li>
+  <li>Split the program into clear, translatable steps</li>
+  <li>Use assignment operators (← or =)</li>
+  <li>Avoid natural language descriptions that cannot be directly coded</li>
+</ul>
+
+<p><strong>Valid pseudocode example:</strong></p>
+<p><code>`</code></p>
+<p>INPUT Number1</p>
+<p>IF Number1 < 10 THEN</p>
+<p>OUTPUT "too small"</p>
+<p>ELSE</p>
+<p>OUTPUT "valid"</p>
+<p>ENDIF</p>
+<p><code>`</code></p>
+
+<p><strong>Invalid pseudocode</strong> uses natural language like "Input the value X" or "Loop 10 times" — these cannot be directly converted to code.</p>
+
+<h2>7.5 Coding</h2>
+
+<p>Once you have decomposed your problem and designed algorithms using flowcharts and/or pseudocode, you can start writing the program in your chosen programming language. This stage includes <strong>iterative testing</strong> — testing each subprogram with a range of data before moving on to the next step.</p>
+
+<h2>7.6 Testing and Test Data</h2>
+
+<p>When you have finished your program, you need to carry out <strong>testing</strong> to make sure it fully works, does not crash, and meets all requirements. There are <strong>four types of test data</strong>:</p>
+
+<ol>
+  <li><strong>Normal data</strong> — Data that the program should accept (within valid range)</li>
+  <li><strong>Abnormal data</strong> — Data that the program should not accept (outside valid range, wrong type)</li>
+  <li><strong>Extreme data</strong> — Data at the edge of what is allowed (boundary values that should be accepted)</li>
+  <li><strong>Boundary data</strong> — Data on the edge of being accepted and being rejected (tests both sides of a limit)</li>
+</ol>
+
+<p><strong>Example — Age input between 10 and 100:</strong></p>
+<ul>
+  <li>Normal: 10, 20, 50, 100</li>
+  <li>Abnormal: 9, −1, 101, 200, "age", "30", 12.2</li>
+  <li>Extreme: 100 (largest accepted), 10 (smallest accepted)</li>
+  <li>Boundary: 100 and 101 (upper), 9 and 10 (lower)</li>
+</ul>
+
+<h2>7.7 Common Algorithms</h2>
+
+<h3>Search Algorithms</h3>
+
+<p>A <strong>search algorithm</strong> checks a set of data to identify whether a specific value exists in the data. One example is a <strong>linear search</strong>.</p>
+
+<h3>Linear Search</h3>
+
+<p>A <strong>linear search</strong> checks each item one at a time, starting from the first item and continuing until it either finds the item or reaches the end of the data.</p>
+
+<p><strong>Algorithm (basic version using FOR loop):</strong></p>
+<p><code>`</code></p>
+<p>FOR ArrayIndex = 0 to LENGTH(Array) - 1</p>
+<p>IF DataArray[ArrayIndex] = SearchValue THEN</p>
+<p>OUTPUT "Found at " & ArrayIndex</p>
+<p>ENDIF</p>
+<p>NEXT ArrayIndex</p>
+<p><code>`</code></p>
+
+<p><strong>Efficient version (stops when found using WHILE loop):</strong></p>
+<p><code>`</code></p>
+<p>Found ← FALSE</p>
+<p>ArrayIndex ← 0</p>
+<p>WHILE Found = FALSE AND ArrayIndex < LENGTH(Array) DO</p>
+<p>IF DataArray[ArrayIndex] = SearchValue THEN</p>
+<p>OUTPUT "Found at " & ArrayIndex</p>
+<p>Found ← TRUE</p>
+<p>ELSE</p>
+<p>ArrayIndex ← ArrayIndex + 1</p>
+<p>ENDIF</p>
+<p>ENDWHILE</p>
+<p><code>`</code></p>
+
+<h3>Sorting Algorithms — Bubble Sort</h3>
+
+<p>A <strong>bubble sort</strong> compares adjacent pairs of items and swaps them if they are in the wrong order. It passes through the entire list repeatedly until the data is sorted.</p>
+
+<p><strong>Two stopping conditions:</strong></p>
+<ol>
+  <li>The algorithm has been through the list (length − 1) times</li>
+  <li>The algorithm has passed through the list without making any changes</li>
+</ol>
+
+<p><strong>Version 1 — Fixed number of passes:</strong></p>
+<p><code>`</code></p>
+<p>FOR NumberPasses ← 0 to LENGTH(DataArray) - 1</p>
+<p>FOR Index ← 0 to LENGTH(DataArray) - 1</p>
+<p>IF DataArray[Index] > DataArray[Index + 1] THEN</p>
+<p>Temp ← DataArray[Index]</p>
+<p>DataArray[Index] ← DataArray[Index + 1]</p>
+<p>DataArray[Index + 1] ← Temp</p>
+<p>ENDIF</p>
+<p>NEXT Index</p>
+<p>NEXT NumberPasses</p>
+<p><code>`</code></p>
+
+<p><strong>Version 2 — Stops when no changes (more efficient):</strong></p>
+<p><code>`</code></p>
+<p>NumberPasses ← 0</p>
+<p>WHILE Changes = FALSE OR NumberPasses <= LENGTH(DataArray) - 1 DO</p>
+<p>Changes ← FALSE</p>
+<p>FOR Index ← 0 to LENGTH(DataArray) - 1</p>
+<p>IF DataArray[Index] > DataArray[Index + 1] THEN</p>
+<p>Temp ← DataArray[Index]</p>
+<p>DataArray[Index] ← DataArray[Index + 1]</p>
+<p>DataArray[Index + 1] ← Temp</p>
+<p>Changes ← TRUE</p>
+<p>ENDIF</p>
+<p>NEXT Index</p>
+<p>ENDWHILE</p>
+<p><code>`</code></p>
+
+<p><strong>To sort in descending order</strong>, change the comparison from <code>></code> to <code><</code>.</p>
+
+<h2>7.8 Totalling, Counting, Maximum, Minimum, and Average</h2>
+
+<h3>Totalling</h3>
+
+<p><strong>Totalling</strong> is adding a group of values together to give a total.</p>
+
+<p>Steps:</p>
+<ol>
+  <li>Initialise a variable to store the total: <code>Total ← 0</code></li>
+  <li>Add each value to the running total: <code>Total ← Total + Value</code></li>
+</ol>
+
+<p><code>`</code></p>
+<p>Total ← 0</p>
+<p>FOR X ← 0 TO 9</p>
+<p>Total ← Total + INPUT("Enter a value")</p>
+<p>NEXT X</p>
+<p>OUTPUT Total</p>
+<p><code>`</code></p>
+
+<h3>Counting</h3>
+
+<p><strong>Counting</strong> is working out how many of something there are.</p>
+
+<p>Steps:</p>
+<ol>
+  <li>Initialise a counter variable: <code>Count ← 0</code></li>
+  <li>Add 1 to the counter each time: <code>Count ← Count + 1</code></li>
+</ol>
+
+<p><code>`</code></p>
+<p>Count ← 0</p>
+<p>Number ← 0</p>
+<p>WHILE Number <> -1 DO</p>
+<p>Number ← INPUT("Enter a number. Enter -1 to stop")</p>
+<p>Count ← Count + 1</p>
+<p>ENDWHILE</p>
+<p><code>`</code></p>
+
+<h3>Finding the Minimum</h3>
+
+<p>The <strong>minimum</strong> value is the smallest value within a set.</p>
+
+<p>Steps:</p>
+<ol>
+  <li>Initialise the minimum to a large value: <code>Minimum ← 9999</code></li>
+  <li>Compare each value: <code>IF Number < Minimum THEN Minimum ← Number</code></li>
+</ol>
+
+<p><code>`</code></p>
+<p>Minimum ← 9999</p>
+<p>Number ← 1</p>
+<p>WHILE Number >= 1 DO</p>
+<p>Number ← INPUT("Enter a number or 0 to stop")</p>
+<p>IF Number < Minimum THEN</p>
+<p>Minimum ← Number</p>
+<p>ENDIF</p>
+<p>ENDWHILE</p>
+<p><code>`</code></p>
+
+<h3>Finding the Maximum</h3>
+
+<p>The <strong>maximum</strong> value is the largest value within a set.</p>
+
+<p>Steps:</p>
+<ol>
+  <li>Initialise the maximum to a small value: <code>Maximum ← -9999</code></li>
+  <li>Compare each value: <code>IF Number > Maximum THEN Maximum ← Number</code></li>
+</ol>
+
+<p><code>`</code></p>
+<p>Maximum ← -9999</p>
+<p>Number ← 1</p>
+<p>WHILE Number >= 1 DO</p>
+<p>Number ← INPUT("Enter a number or 0 to stop")</p>
+<p>IF Number > Maximum THEN</p>
+<p>Maximum ← Number</p>
+<p>ENDIF</p>
+<p>ENDWHILE</p>
+<p><code>`</code></p>
+
+<h3>Finding the Average</h3>
+
+<p>The <strong>average</strong> (mean) is the total of all values divided by the count of values.</p>
+
+<p>Formula: <code>Average = Total / Count</code></p>
+
+<p><code>`</code></p>
+<p>Count ← 0</p>
+<p>Total ← 0</p>
+<p>Number ← 1</p>
+<p>WHILE Number >= 1 DO</p>
+<p>Number ← INPUT("Enter a number or 0 to stop")</p>
+<p>Total ← Total + Number</p>
+<p>Count ← Count + 1</p>
+<p>ENDWHILE</p>
+<p>Average ← Total / Count</p>
+<p><code>`</code></p>
+
+<h2>7.9 Validation on Input</h2>
+
+<p><strong>Validation</strong> is the checking of data that is input to make sure it is reasonable, and/or within set bounds.</p>
+
+<h3>Range Check</h3>
+
+<p>A <strong>range check</strong> assesses whether data is within one or two bounds (e.g., age must be between 0 and 100).</p>
+
+<p><code>`</code></p>
+<p>Number ← INPUT("Enter a number between 1 and 10")</p>
+<p>WHILE Number < 1 OR Number > 10 DO</p>
+<p>OUTPUT("Invalid please try again")</p>
+<p>Number ← INPUT()</p>
+<p>ENDWHILE</p>
+<p><code>`</code></p>
+
+<h3>Length Check</h3>
+
+<p>A <strong>length check</strong> checks the number of characters in a string.</p>
+
+<p><code>`</code></p>
+<p>Data ← Input()</p>
+<p>WHILE LENGTH(Data) < 10 DO</p>
+<p>OUTPUT("Invalid, please try again")</p>
+<p>Data ← INPUT()</p>
+<p>ENDWHILE</p>
+<p><code>`</code></p>
+
+<h3>Type Check</h3>
+
+<p>A <strong>type check</strong> verifies that data is of the correct data type (integer, real, string, Boolean).</p>
+
+<p>Methods:</p>
+<ol>
+  <li>Use <code>.GetDataType()</code> to return the data type and compare</li>
+  <li>Use <code>.IsInteger()</code> or <code>.IsString</code> to return True/False</li>
+</ol>
+
+<p><code>`</code></p>
+<p>INPUT Data</p>
+<p>IF Data.GetDataType() <> Integer THEN</p>
+<p>OUTPUT ("Invalid")</p>
+<p>ENDIF</p>
+<p><code>`</code></p>
+
+<h3>Presence Check</h3>
+
+<p>A <strong>presence check</strong> ensures that some data has been entered (not null or empty string).</p>
+
+<p><code>`</code></p>
+<p>INPUT Data</p>
+<p>WHILE Data = "" DO</p>
+<p>OUTPUT("Invalid please try again")</p>
+<p>INPUT Data</p>
+<p>ENDWHILE</p>
+<p><code>`</code></p>
+
+<h3>Format Check</h3>
+
+<p>A <strong>format check</strong> ensures data is entered in a specific format (e.g., date as DD/MM/YYYY, ID as 1 number followed by 2 characters).</p>
+
+<p>Uses <code>SUBSTRING(String, X, Y)</code> to extract and check individual characters at specific positions.</p>
+
+<h3>Check Digit</h3>
+
+<p>A <strong>check digit</strong> is calculated from a set of numbers and is input with the numbers. When data is entered, the calculation is performed again and compared with the final number to detect data entry errors.</p>
+
+<h2>7.10 Verification of Data</h2>
+
+<p><strong>Verification</strong> is a check that you have copied data accurately from the original source. It ensures the data entered matches what was originally written.</p>
+
+<p><strong>Two forms of verification:</strong></p>
+<ol>
+  <li><strong>Visual check</strong> — Compare the data entered to the original (e.g., reading from a paper copy and checking it on screen)</li>
+  <li><strong>Double entry check</strong> — The same data is entered twice (usually by different people), then the computer checks for differences</li>
+</ol>
+
+<p><strong>Important distinction:</strong> Validation checks if data is reasonable; verification checks if data has been copied accurately. Verification only confirms accurate copying — the original data may still be incorrect.</p>
+
+<h2>7.11 Trace Tables</h2>
+
+<p>A <strong>trace table</strong> is a structure to help you follow an algorithm manually, to find errors or work out what the algorithm does.</p>
+
+<p><strong>How to create a trace table:</strong></p>
+<ol>
+  <li>Identify all variables in the algorithm — each gets its own column</li>
+  <li>Add an OUTPUT column if the program outputs data or strings</li>
+  <li>Read through the algorithm one line at a time</li>
+  <li>Write new values in the table as they change</li>
+  <li>When a variable gets a new value, write it below the previous value in the same column</li>
+</ol>
+
+<p><strong>Key rules:</strong></p>
+<ul>
+  <li>Follow code line by line — do not jump ahead</li>
+  <li>When you reach the end of a loop, go back to the loop condition</li>
+  <li>Outputs must match exactly what is in the code</li>
+  <li>Specific inputs can be given to test different parts of the algorithm</li>
+</ul>
+
+<h3>Trace Table with Selection</h3>
+
+<p>For IF/ELSE statements, evaluate the condition with current variable values and follow the appropriate branch.</p>
+
+<h3>Trace Table with Loops</h3>
+
+<p>For loops (WHILE/FOR), repeat the body until the condition becomes false, updating variables each iteration.</p>
+
+<h2>7.12 Finding the Purpose of an Algorithm</h2>
+
+<p>A trace table can help you work out the <strong>purpose of an algorithm</strong> by following it step-by-step to see what happens to the values, what changes are made, and when.</p>
+
+<p><strong>Steps to describe an algorithm's purpose:</strong></p>
+<ol>
+  <li>Run the algorithm with test data using a trace table</li>
+  <li>Identify what each section of code does (not just repeat what the code says)</li>
+  <li>Look at the overall pattern of inputs, processes, and outputs</li>
+  <li>Write a description that explains the algorithm's purpose in English</li>
+</ol>
+
+<p><strong>Important:</strong> When describing an algorithm, do more than repeat the line of code. Explain <em>what</em> the algorithm achieves, not just <em>how</em> it works line by line.</p>
+
+<h2>7.13 Finding and Correcting Errors</h2>
+
+<p>To find errors in an algorithm:</p>
+<ol>
+  <li>Know the purpose of the algorithm (what it should do)</li>
+  <li>Test with different data, completing trace tables if needed</li>
+  <li>Compare what the algorithm actually does vs. what it should do</li>
+  <li>Identify the specific errors and make corrections</li>
+</ol>
+
+<p><strong>Common errors to look for:</strong></p>
+<ul>
+  <li>Variables initialised to wrong values (e.g., Total ← 1 instead of Total ← 0)</li>
+  <li>Overwriting instead of accumulating (e.g., Total ← Number instead of Total ← Total + Number)</li>
+  <li>Off-by-one errors in loop conditions (e.g., WHILE Quantity < 5 runs 4 times, not 5)</li>
+  <li>Wrong comparison operators (< instead of >)</li>
+  <li>Wrong variable identifiers (e.g., using <code>Large</code> instead of <code>Largest</code>)</li>
+</ul>
+
+<p><strong>Methods for finding errors:</strong></p>
+<ol>
+  <li><strong>Trace tables</strong> — Follow the algorithm step by step and compare output to expected result</li>
+  <li><strong>Reading the code</strong> — Check each requirement against the algorithm to see if it is met</li>
+  <li><strong>IDE debugging tools</strong> — Use breakpoints and variable inspection in an Integrated Development Environment</li>
+</ol>
+
+<h2>Flowcharts</h2>
+
+<p><strong>Flowcharts</strong> are graphical representations of algorithms using standard symbols:</p>
+<ul>
+  <li><strong>Oval/Rounded rectangle</strong> — Start/End (Terminator)</li>
+  <li><strong>Parallelogram</strong> — Input/Output</li>
+  <li><strong>Rectangle</strong> — Process</li>
+  <li><strong>Diamond</strong> — Decision (Yes/No)</li>
+  <li><strong>Arrows</strong> — Flow of control</li>
+</ul>
+
+<p>Flowcharts can be converted to pseudocode and vice versa.</p>
+
+<hr>
+
+<h2>Important Terms</h2>
+
+<table>
+  <tr>
+    <th>Term</th>
+    <th>Definition</th>
+  </tr>
+  <tr>
+    <td>Program development life cycle</td>
+    <td>A structured, organised plan used when creating a new computer program, including analysis, design, coding, and testing stages</td>
+  </tr>
+  <tr>
+    <td>Analysis</td>
+    <td>The first stage of the life cycle where the problem is explored and requirements are identified</td>
+  </tr>
+  <tr>
+    <td>Decomposition</td>
+    <td>The process of splitting a problem or system into smaller subproblems or sub-systems</td>
+  </tr>
+  <tr>
+    <td>Structure diagram</td>
+    <td>A diagram showing how a program is decomposed into subprograms, with the program name at the top and subprograms below</td>
+  </tr>
+  <tr>
+    <td>Design</td>
+    <td>The stage where algorithms are planned using structure diagrams, flowcharts, and pseudocode</td>
+  </tr>
+  <tr>
+    <td>Pseudocode</td>
+    <td>Readable, code-like statements that use keywords and constructs (IF, WHILE, FOR) but are not written to run on a computer</td>
+  </tr>
+  <tr>
+    <td>Coding</td>
+    <td>The stage where the program is written in a chosen programming language</td>
+  </tr>
+  <tr>
+    <td>Iterative testing</td>
+    <td>Testing carried out while the program is being developed, testing each subprogram before moving on</td>
+  </tr>
+  <tr>
+    <td>Testing</td>
+    <td>The stage where the finished program is checked to ensure it fully works, does not crash, and meets requirements</td>
+  </tr>
+  <tr>
+    <td>Normal data</td>
+    <td>Test data that the program should accept, within the valid range</td>
+  </tr>
+  <tr>
+    <td>Abnormal data</td>
+    <td>Test data that the program should not accept, outside the valid range or wrong data type</td>
+  </tr>
+  <tr>
+    <td>Extreme data</td>
+    <td>Test data at the very edge of what is allowed (boundary values that should be accepted)</td>
+  </tr>
+  <tr>
+    <td>Boundary data</td>
+    <td>Test data on the edge of being accepted and rejected, testing both sides of a limit</td>
+  </tr>
+  <tr>
+    <td>Search algorithm</td>
+    <td>An algorithm that checks a set of data to find whether a specific value exists</td>
+  </tr>
+  <tr>
+    <td>Linear search</td>
+    <td>A search that checks each item one at a time from the first to the last until the item is found or all items are checked</td>
+  </tr>
+  <tr>
+    <td>Sorting algorithm</td>
+    <td>An algorithm that rearranges data into a specific order (e.g., ascending or descending)</td>
+  </tr>
+  <tr>
+    <td>Bubble sort</td>
+    <td>A sorting algorithm that compares adjacent pairs and swaps them if they are in the wrong order, repeatedly passing through the list</td>
+  </tr>
+  <tr>
+    <td>Totalling</td>
+    <td>Adding a group of values together to give a total</td>
+  </tr>
+  <tr>
+    <td>Counting</td>
+    <td>Working out how many of something there are by incrementing a counter variable</td>
+  </tr>
+  <tr>
+    <td>Minimum</td>
+    <td>The smallest value within a set, found by initialising a variable to a large value and comparing</td>
+  </tr>
+  <tr>
+    <td>Maximum</td>
+    <td>The largest value within a set, found by initialising a variable to a small value and comparing</td>
+  </tr>
+  <tr>
+    <td>Average (Mean)</td>
+    <td>The total of all values divided by the count of values</td>
+  </tr>
+  <tr>
+    <td>Validation</td>
+    <td>Checking that data input is reasonable and within set bounds before it is processed</td>
+  </tr>
+  <tr>
+    <td>Range check</td>
+    <td>A validation check that ensures data is within one or two specified bounds</td>
+  </tr>
+  <tr>
+    <td>Length check</td>
+    <td>A validation check that verifies the number of characters in a string meets requirements</td>
+  </tr>
+  <tr>
+    <td>Type check</td>
+    <td>A validation check that ensures data is of the correct data type (integer, real, string, Boolean)</td>
+  </tr>
+  <tr>
+    <td>Presence check</td>
+    <td>A validation check that ensures some data has been entered (not null or empty)</td>
+  </tr>
+  <tr>
+    <td>Format check</td>
+    <td>A validation check that ensures data is entered in a specific required format</td>
+  </tr>
+  <tr>
+    <td>Check digit</td>
+    <td>A digit calculated from a set of numbers and compared after entry to detect data entry errors</td>
+  </tr>
+  <tr>
+    <td>Verification</td>
+    <td>A check that data has been copied accurately from the original source</td>
+  </tr>
+  <tr>
+    <td>Visual check</td>
+    <td>A verification method where data entered is compared to the original by reading and checking</td>
+  </tr>
+  <tr>
+    <td>Double entry check</td>
+    <td>A verification method where data is entered twice (usually by different people) and checked for differences</td>
+  </tr>
+  <tr>
+    <td>Trace table</td>
+    <td>A structure used to follow an algorithm manually by recording variable values at each step</td>
+  </tr>
+  <tr>
+    <td>Flowchart</td>
+    <td>A graphical representation of an algorithm using standard symbols (ovals, diamonds, rectangles, parallelograms)</td>
+  </tr>
+  <tr>
+    <td>Subprogram</td>
+    <td>A smaller program that is part of a larger program, created through decomposition</td>
+  </tr>
+  <tr>
+    <td>Identifier</td>
+    <td>The name given to a variable, constant, or other data item in a program</td>
+  </tr>
+  <tr>
+    <td>Algorithm</td>
+    <td>A set of step-by-step instructions to solve a problem or complete a task</td>
+  </tr>
+</table>
+
+<hr>
+
+<h2>Practice Questions</h2>
+
+<h3>Question CS7.01</h3>
+<p>What are the four stages of the program development life cycle?</p>
+
+<p><strong>Answer:</strong> The four stages are: (1) Analysis — the problem is explored and requirements identified; (2) Design — algorithms are planned using structure diagrams, flowcharts, and pseudocode; (3) Coding — the program is written in a programming language; (4) Testing — the program is tested to ensure it works correctly and meets requirements.</p>
+
+<h3>Question CS7.02</h3>
+<p>Define the term 'decomposition' and explain why it is used in the analysis stage.</p>
+
+<p><strong>Answer:</strong> Decomposition is the process of splitting a problem or system into smaller subproblems or sub-systems. It is used in the analysis stage because it allows developers to identify the requirements for each component part separately, making complex problems more manageable. Each subproblem can then be implemented as a subprogram.</p>
+
+<h3>Question CS7.03</h3>
+<p>Describe the purpose of pseudocode and give one rule for writing valid pseudocode.</p>
+
+<p><strong>Answer:</strong> Pseudocode is used to plan algorithms in a readable, code-like format that all programmers can understand and translate into any programming language. A rule for valid pseudocode is that it must use programming constructs such as IF, WHILE, FOR, INPUT, and OUTPUT — it should not be written in plain natural language that cannot be directly converted to code.</p>
+
+<h3>Question CS7.04</h3>
+<p>Identify four different types of test data and give an example of each for a program that accepts numbers between 1 and 50.</p>
+
+<p><strong>Answer:</strong> (1) Normal data: any number between 1 and 50 (e.g., 25); (2) Abnormal data: data outside the range or wrong type (e.g., 0, 51, "hello"); (3) Extreme data: data at the very edge of the valid range (e.g., 1 and 50); (4) Boundary data: data on both sides of the limits (e.g., 0 and 1 at the lower bound, 50 and 51 at the upper bound).</p>
+
+<h3>Question CS7.05</h3>
+<p>Explain how a linear search algorithm works.</p>
+
+<p><strong>Answer:</strong> A linear search checks each item in a set of data one at a time, starting from the first item. It compares each item with the search value. If the item matches, the search is complete and the position is reported. If the item does not match, the algorithm moves to the next item. The search continues until the item is found or all items have been checked without finding a match.</p>
+
+<h3>Question CS7.06</h3>
+<p>Describe how a bubble sort works and state the two conditions for stopping.</p>
+
+<p><strong>Answer:</strong> A bubble sort compares the first two adjacent values; if they are in the wrong order, it swaps them. It then moves to the next pair (values 2 and 3) and repeats. This continues until the end of the list, completing one pass. The algorithm stops when either: (1) it has completed (length − 1) passes through the list, or (2) it has completed a full pass without making any swaps, meaning the data is already sorted.</p>
+
+<h3>Question CS7.07</h3>
+<p>Explain the difference between the two versions of the bubble sort algorithm in terms of efficiency.</p>
+
+<p><strong>Answer:</strong> Version 1 always runs (length − 1) passes regardless of whether the data is already sorted, making it less efficient. Version 2 uses a flag variable to track whether any swaps were made during a pass; if no swaps occur, the algorithm stops early because the data is already in order. Version 2 is more efficient because it avoids unnecessary passes through already-sorted data.</p>
+
+<h3>Question CS7.08</h3>
+<p>Write a pseudocode algorithm to find the total and average of 10 numbers input by a user.</p>
+
+<p><strong>Answer:</strong></p>
+<p><code>`</code></p>
+<p>Total ← 0</p>
+<p>FOR X ← 0 TO 9</p>
+<p>Number ← INPUT("Enter a number")</p>
+<p>Total ← Total + Number</p>
+<p>NEXT X</p>
+<p>Average ← Total / 10</p>
+<p>OUTPUT "Total: ", Total</p>
+<p>OUTPUT "Average: ", Average</p>
+<p><code>`</code></p>
+
+<h3>Question CS7.09</h3>
+<p>Explain the difference between totalling and counting.</p>
+
+<p><strong>Answer:</strong> Totalling is adding a group of values together to get a sum (e.g., Total ← Total + Value). Counting is tracking how many items there are by incrementing a counter by 1 each time (e.g., Count ← Count + 1). Totalling accumulates the actual values, while counting simply tracks the number of occurrences.</p>
+
+<h3>Question CS7.10</h3>
+<p>Describe how you would find the minimum value from a set of numbers using an algorithm.</p>
+
+<p><strong>Answer:</strong> To find the minimum: (1) Initialise a minimum variable to a very large value (e.g., Minimum ← 9999). (2) Compare each input number to the current minimum. (3) If the number is smaller than the current minimum, replace the minimum with that number (Minimum ← Number). (4) After all numbers have been checked, the minimum variable holds the smallest value.</p>
+
+<h3>Question CS7.11</h3>
+<p>What is validation? Give three examples of validation checks.</p>
+
+<p><strong>Answer:</strong> Validation is the checking of data that is input to make sure it is reasonable and within set bounds. Three examples are: (1) Range check — ensures data is within specified bounds (e.g., age between 0 and 100); (2) Length check — ensures a string has the required number of characters (e.g., password at least 8 characters); (3) Type check — ensures data is the correct data type (e.g., checking input is an integer, not a string).</p>
+
+<h3>Question CS7.12</h3>
+<p>Explain the difference between validation and verification.</p>
+
+<p><strong>Answer:</strong> Validation checks that data input is reasonable and within set bounds (e.g., an age must be between 0 and 100). Verification checks that data has been copied accurately from the original source (e.g., matching a typed entry to a paper form). Validation ensures data is sensible; verification ensures data has been entered correctly. However, verification only confirms accurate copying — the original data may still be incorrect.</p>
+
+<h3>Question CS7.13</h3>
+<p>Describe the two types of verification checks.</p>
+
+<p><strong>Answer:</strong> (1) Visual check — the user compares the data entered on screen to the original source (e.g., reading each line from a paper copy and checking it matches what is on the computer). (2) Double entry check — the same data is entered twice, usually by different people, and the computer checks whether there are any differences between the two entries.</p>
+
+<h3>Question CS7.14</h3>
+<p>What is a trace table and what is it used for?</p>
+
+<p><strong>Answer:</strong> A trace table is a structure used to follow an algorithm manually by recording the values of each variable at each step of execution. It is used to: (1) dry run an algorithm to see what it does with specific input data; (2) find the purpose of an unknown algorithm; and (3) find errors in an algorithm by comparing the actual output to the expected output.</p>
+
+<h3>Question CS7.15</h3>
+<p>Describe the steps for creating a trace table from an algorithm.</p>
+
+<p><strong>Answer:</strong> (1) Identify all variables in the algorithm — each gets its own column. (2) Add an OUTPUT column if the program produces output. (3) Read through the algorithm one line at a time, starting from the first line. (4) When a variable's value changes, write the new value below the previous value in that variable's column. (5) For loops, go back to the loop condition when reaching the end of the loop body. (6) Record outputs exactly as they appear in the code.</p>
+
+<h3>Question CS7.16</h3>
+<p>Perform a linear search for the number 6 in the following data: 10 5 6 8 1 2. Show each comparison.</p>
+
+<p><strong>Answer:</strong> Compare 10 with 6 — not the same. Compare 5 with 6 — not the same. Compare 6 with 6 — they are the same. The number 6 is found at position 3 (index 2). Three comparisons were needed.</p>
+
+<h3>Question CS7.17</h3>
+<p>A program allows the user to input a number between 1 and 10 (inclusive). Identify test data for each of the four test data types.</p>
+
+<p><strong>Answer:</strong> Normal: any number from 1 to 10 (e.g., 5). Abnormal: a value outside the range or wrong type (e.g., 0, 11, "abc", 3.5). Extreme: the boundary values that should be accepted (1 and 10). Boundary: values on both sides of each boundary (0 and 1 at the lower end, 10 and 11 at the upper end).</p>
+
+<h3>Question CS7.18</h3>
+<p>Write a pseudocode validation routine using a WHILE loop to input a number and check it is between 1 and 100 inclusive.</p>
+
+<p><strong>Answer:</strong></p>
+<p><code>`</code></p>
+<p>Number ← INPUT("Enter a number between 1 and 100")</p>
+<p>WHILE Number < 1 OR Number > 100 DO</p>
+<p>OUTPUT("Invalid, please try again")</p>
+<p>Number ← INPUT("Enter a number between 1 and 100")</p>
+<p>ENDWHILE</p>
+<p>OUTPUT("Valid")</p>
+<p><code>`</code></p>
+
+<h3>Question CS7.19</h3>
+<p>A program stores a number for a user to guess. The user has up to 10 attempts. After each turn the program outputs whether their guess is smaller, larger, or equal. Identify the inputs, processes, and outputs.</p>
+
+<p><strong>Answer:</strong> Inputs: the stored number, the user's guess each turn. Processes: compare the guess to the stored number, count the number of attempts, check if the guess is correct or if 10 attempts have been used. Outputs: "too small", "too large", or "correct" after each guess, the number of attempts if correct, and the answer if all 10 guesses are used.</p>
+
+<h3>Question CS7.20</h3>
+<p>Identify which validation rule this algorithm uses: INPUT Num; IF Num > 0 AND Num < 100 THEN OUTPUT "Valid" ELSE OUTPUT "Invalid" ENDIF.</p>
+
+<p><strong>Answer:</strong> This algorithm uses a <strong>range check</strong>. It validates that the input number is within the range of greater than 0 and less than 100. Any value outside this range is rejected as invalid.</p>
+
+<hr>
+
+<h2>Key Formulas and Concepts</h2>
+
+<ol>
+  <li>Average = Total / Count</li>
+  <li>Bubble sort maximum passes = Length of array − 1</li>
+  <li>Linear search worst case comparisons = Length of array (item not found)</li>
+  <li>Totalling pattern: Total ← 0, then Total ← Total + Value (inside loop)</li>
+  <li>Counting pattern: Count ← 0, then Count ← Count + 1 (inside loop)</li>
+  <li>Finding minimum: Initialise Minimum ← large value, then IF Number < Minimum THEN Minimum ← Number</li>
+  <li>Finding maximum: Initialise Maximum ← small value, then IF Number > Maximum THEN Maximum ← Number</li>
+  <li>Bubble sort swap pattern: Temp ← A, A ← B, B ← Temp (three-variable swap)</li>
+  <li>SUBSTRING(String, StartPosition, NumberOfCharacters) — extracts part of a string for format checks</li>
+  <li>Check digit verification: Calculate digit from data, compare with stored check digit</li>
+</ol>
+
+<hr>
+
+<h2>Exam Focus Priorities</h2>
+
+<ol>
+  <li>Be able to create structure diagrams by decomposing a problem into subprograms — show clear hierarchical relationships</li>
+  <li>Write pseudocode algorithms using correct constructs (IF/ELSE/ENDIF, WHILE/ENDWHILE, FOR/NEXT, INPUT, OUTPUT)</li>
+  <li>Perform and show the working of a linear search step by step</li>
+  <li>Perform and show the working of a bubble sort pass by pass, clearly showing each comparison and swap</li>
+  <li>Identify and provide examples of all four types of test data (normal, abnormal, extreme, boundary) for a given scenario</li>
+  <li>Complete trace tables accurately for algorithms with selection (IF) and iteration (WHILE, FOR) — record every variable change</li>
+  <li>Identify and explain the six types of validation (range, length, type, presence, format, check digit)</li>
+  <li>Distinguish clearly between validation (checking data is reasonable) and verification (checking data is accurately copied)</li>
+  <li>Find and correct errors in algorithms by comparing actual output to expected output using trace tables or code reading</li>
+  <li>Describe the purpose of an algorithm by analysing its trace table output, not just repeating what each line does</li>
+</ol>
+
+</body>
+</html>

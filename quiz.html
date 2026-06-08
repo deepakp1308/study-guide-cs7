@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS7 Algorithm Design and Problem Solving — Cambridge IGCSE Computer Science Study Guide — Interactive Quiz</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, 'Helvetica Neue', sans-serif;
+    background: #f5f7fa;
+    color: #1a1a1a;
+    line-height: 1.6;
+  }
+  .header {
+    background: #1a3c5e;
+    color: white;
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .header h1 { font-size: 24px; margin-bottom: 4px; }
+  .header p { opacity: 0.8; font-size: 14px; }
+  .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+  .progress-bar {
+    background: #e0e0e0;
+    border-radius: 8px;
+    height: 8px;
+    margin: 20px 0;
+    overflow: hidden;
+  }
+  .progress-fill {
+    background: #2a5f8f;
+    height: 100%;
+    transition: width 0.3s ease;
+    border-radius: 8px;
+  }
+  .score-display {
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 16px;
+  }
+  .question-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: none;
+  }
+  .question-card.active { display: block; }
+  .question-card .q-number {
+    font-size: 12px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .question-card .q-type {
+    display: inline-block;
+    background: #e8f0fe;
+    color: #1a3c5e;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .question-card .q-text {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .option:hover { border-color: #2a5f8f; background: #f0f4ff; }
+  .option.selected { border-color: #2a5f8f; background: #e8f0fe; }
+  .option.correct { border-color: #2d8a4e; background: #e8f5e9; }
+  .option.wrong { border-color: #c62828; background: #ffebee; }
+  .option:disabled { cursor: default; opacity: 0.85; }
+  .tf-btns { display: flex; gap: 12px; }
+  .tf-btns button {
+    flex: 1;
+    padding: 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    background: white;
+    transition: all 0.2s;
+  }
+  .tf-btns button:hover { border-color: #2a5f8f; }
+  .tf-btns button.correct { border-color: #2d8a4e; background: #e8f5e9; }
+  .tf-btns button.wrong { border-color: #c62828; background: #ffebee; }
+  .freeform-area {
+    width: 100%;
+    min-height: 80px;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    resize: vertical;
+  }
+  .explanation {
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: #f8fafc;
+    border-left: 3px solid #2a5f8f;
+    border-radius: 4px;
+    font-size: 14px;
+    display: none;
+  }
+  .explanation.show { display: block; }
+  .nav-btns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+  .nav-btns button {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-next { background: #2a5f8f; color: white; }
+  .btn-next:hover { background: #1a3c5e; }
+  .btn-reveal { background: #e0e0e0; color: #333; }
+  .btn-reveal:hover { background: #d0d0d0; }
+  .results-card {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: none;
+  }
+  .results-card h2 { font-size: 28px; margin-bottom: 8px; }
+  .results-card .score-big {
+    font-size: 64px;
+    font-weight: 700;
+    color: #2a5f8f;
+    margin: 16px 0;
+  }
+  .results-card .grade { font-size: 18px; margin-bottom: 24px; }
+  .btn-restart {
+    padding: 12px 32px;
+    background: #2a5f8f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>CS7 Algorithm Design and Problem Solving — Cambridge IGCSE Computer Science Study Guide</h1>
+  <p>Interactive Study Quiz</p>
+</div>
+<div class="container">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="score-display" id="scoreDisplay">Question 1 of —</div>
+  <div id="questionsContainer"></div>
+  <div class="results-card" id="resultsCard">
+    <h2>Quiz Complete!</h2>
+    <div class="score-big" id="finalScore">0%</div>
+    <div class="grade" id="gradeText"></div>
+    <button class="btn-restart" onclick="restart()">Try Again</button>
+  </div>
+</div>
+<script>
+const DATA = {"title": "CS7 Algorithm Design and Problem Solving \u2014 Cambridge IGCSE Computer Science Study Guide", "mcq": [{"id": "term_0", "type": "mcq", "question": "What is the definition of <b>Program development life cycle</b>?", "options": ["A structured, organised plan used when creating a new computer program, including analysis, design, coding, and testing stages", "The process of splitting a problem or system into smaller subproblems or sub-systems", "Test data that the program should accept, within the valid range", "A validation check that ensures data is of the correct data type (integer, real, string, Boolean)"], "correct": 0, "explanation": "A structured, organised plan used when creating a new computer program, including analysis, design, coding, and testing stages"}, {"id": "term_1", "type": "mcq", "question": "What is the definition of <b>Analysis</b>?", "options": ["Test data that the program should not accept, outside the valid range or wrong data type", "A search that checks each item one at a time from the first to the last until the item is found or all items are checked", "The first stage of the life cycle where the problem is explored and requirements are identified", "The total of all values divided by the count of values"], "correct": 2, "explanation": "The first stage of the life cycle where the problem is explored and requirements are identified"}, {"id": "term_2", "type": "mcq", "question": "What is the definition of <b>Decomposition</b>?", "options": ["A diagram showing how a program is decomposed into subprograms, with the program name at the top and subprograms below", "The process of splitting a problem or system into smaller subproblems or sub-systems", "The stage where the finished program is checked to ensure it fully works, does not crash, and meets requirements", "The smallest value within a set, found by initialising a variable to a large value and comparing"], "correct": 1, "explanation": "The process of splitting a problem or system into smaller subproblems or sub-systems"}, {"id": "term_3", "type": "mcq", "question": "What is the definition of <b>Structure diagram</b>?", "options": ["Adding a group of values together to give a total", "A diagram showing how a program is decomposed into subprograms, with the program name at the top and subprograms below", "A validation check that ensures some data has been entered (not null or empty)", "The smallest value within a set, found by initialising a variable to a large value and comparing"], "correct": 1, "explanation": "A diagram showing how a program is decomposed into subprograms, with the program name at the top and subprograms below"}, {"id": "term_4", "type": "mcq", "question": "What is the definition of <b>Design</b>?", "options": ["The stage where algorithms are planned using structure diagrams, flowcharts, and pseudocode", "A validation check that verifies the number of characters in a string meets requirements", "The first stage of the life cycle where the problem is explored and requirements are identified", "A verification method where data entered is compared to the original by reading and checking"], "correct": 0, "explanation": "The stage where algorithms are planned using structure diagrams, flowcharts, and pseudocode"}, {"id": "term_5", "type": "mcq", "question": "What is the definition of <b>Pseudocode</b>?", "options": ["A validation check that ensures data is entered in a specific required format", "The smallest value within a set, found by initialising a variable to a large value and comparing", "An algorithm that checks a set of data to find whether a specific value exists", "Readable, code-like statements that use keywords and constructs (IF, WHILE, FOR) but are not written to run on a computer"], "correct": 3, "explanation": "Readable, code-like statements that use keywords and constructs (IF, WHILE, FOR) but are not written to run on a computer"}, {"id": "term_6", "type": "mcq", "question": "What is the definition of <b>Coding</b>?", "options": ["The stage where algorithms are planned using structure diagrams, flowcharts, and pseudocode", "A verification method where data is entered twice (usually by different people) and checked for differences", "The stage where the program is written in a chosen programming language", "A verification method where data entered is compared to the original by reading and checking"], "correct": 2, "explanation": "The stage where the program is written in a chosen programming language"}, {"id": "term_7", "type": "mcq", "question": "What is the definition of <b>Iterative testing</b>?", "options": ["Testing carried out while the program is being developed, testing each subprogram before moving on", "A validation check that ensures data is of the correct data type (integer, real, string, Boolean)", "The first stage of the life cycle where the problem is explored and requirements are identified", "Checking that data input is reasonable and within set bounds before it is processed"], "correct": 0, "explanation": "Testing carried out while the program is being developed, testing each subprogram before moving on"}, {"id": "term_8", "type": "mcq", "question": "What is the definition of <b>Testing</b>?", "options": ["A digit calculated from a set of numbers and compared after entry to detect data entry errors", "The stage where the finished program is checked to ensure it fully works, does not crash, and meets requirements", "A search that checks each item one at a time from the first to the last until the item is found or all items are checked", "A set of step-by-step instructions to solve a problem or complete a task"], "correct": 1, "explanation": "The stage where the finished program is checked to ensure it fully works, does not crash, and meets requirements"}, {"id": "term_9", "type": "mcq", "question": "What is the definition of <b>Normal data</b>?", "options": ["A validation check that ensures data is within one or two specified bounds", "The stage where the finished program is checked to ensure it fully works, does not crash, and meets requirements", "The name given to a variable, constant, or other data item in a program", "Test data that the program should accept, within the valid range"], "correct": 3, "explanation": "Test data that the program should accept, within the valid range"}, {"id": "term_10", "type": "mcq", "question": "What is the definition of <b>Abnormal data</b>?", "options": ["A validation check that verifies the number of characters in a string meets requirements", "A smaller program that is part of a larger program, created through decomposition", "Test data that the program should not accept, outside the valid range or wrong data type", "A search that checks each item one at a time from the first to the last until the item is found or all items are checked"], "correct": 2, "explanation": "Test data that the program should not accept, outside the valid range or wrong data type"}, {"id": "term_11", "type": "mcq", "question": "What is the definition of <b>Extreme data</b>?", "options": ["Test data at the very edge of what is allowed (boundary values that should be accepted)", "A verification method where data is entered twice (usually by different people) and checked for differences", "The stage where algorithms are planned using structure diagrams, flowcharts, and pseudocode", "Testing carried out while the program is being developed, testing each subprogram before moving on"], "correct": 0, "explanation": "Test data at the very edge of what is allowed (boundary values that should be accepted)"}, {"id": "term_12", "type": "mcq", "question": "What is the definition of <b>Boundary data</b>?", "options": ["A graphical representation of an algorithm using standard symbols (ovals, diamonds, rectangles, parallelograms)", "Test data on the edge of being accepted and rejected, testing both sides of a limit", "A structured, organised plan used when creating a new computer program, including analysis, design, coding, and testing stages", "A diagram showing how a program is decomposed into subprograms, with the program name at the top and subprograms below"], "correct": 1, "explanation": "Test data on the edge of being accepted and rejected, testing both sides of a limit"}, {"id": "term_13", "type": "mcq", "question": "What is the definition of <b>Search algorithm</b>?", "options": ["A smaller program that is part of a larger program, created through decomposition", "The stage where the finished program is checked to ensure it fully works, does not crash, and meets requirements", "A validation check that ensures some data has been entered (not null or empty)", "An algorithm that checks a set of data to find whether a specific value exists"], "correct": 3, "explanation": "An algorithm that checks a set of data to find whether a specific value exists"}, {"id": "term_14", "type": "mcq", "question": "What is the definition of <b>Linear search</b>?", "options": ["A validation check that verifies the number of characters in a string meets requirements", "Test data on the edge of being accepted and rejected, testing both sides of a limit", "A search that checks each item one at a time from the first to the last until the item is found or all items are checked", "The stage where the program is written in a chosen programming language"], "correct": 2, "explanation": "A search that checks each item one at a time from the first to the last until the item is found or all items are checked"}, {"id": "term_15", "type": "mcq", "question": "What is the definition of <b>Sorting algorithm</b>?", "options": ["Checking that data input is reasonable and within set bounds before it is processed", "Test data that the program should not accept, outside the valid range or wrong data type", "An algorithm that rearranges data into a specific order (e.g., ascending or descending)", "The name given to a variable, constant, or other data item in a program"], "correct": 2, "explanation": "An algorithm that rearranges data into a specific order (e.g., ascending or descending)"}, {"id": "term_16", "type": "mcq", "question": "What is the definition of <b>Bubble sort</b>?", "options": ["A sorting algorithm that compares adjacent pairs and swaps them if they are in the wrong order, repeatedly passing through the list", "A digit calculated from a set of numbers and compared after entry to detect data entry errors", "A validation check that ensures data is of the correct data type (integer, real, string, Boolean)", "A diagram showing how a program is decomposed into subprograms, with the program name at the top and subprograms below"], "correct": 0, "explanation": "A sorting algorithm that compares adjacent pairs and swaps them if they are in the wrong order, repeatedly passing through the list"}, {"id": "term_17", "type": "mcq", "question": "What is the definition of <b>Totalling</b>?", "options": ["A structured, organised plan used when creating a new computer program, including analysis, design, coding, and testing stages", "Testing carried out while the program is being developed, testing each subprogram before moving on", "A graphical representation of an algorithm using standard symbols (ovals, diamonds, rectangles, parallelograms)", "Adding a group of values together to give a total"], "correct": 3, "explanation": "Adding a group of values together to give a total"}, {"id": "term_18", "type": "mcq", "question": "What is the definition of <b>Counting</b>?", "options": ["Working out how many of something there are by incrementing a counter variable", "A set of step-by-step instructions to solve a problem or complete a task", "The stage where algorithms are planned using structure diagrams, flowcharts, and pseudocode", "An algorithm that rearranges data into a specific order (e.g., ascending or descending)"], "correct": 0, "explanation": "Working out how many of something there are by incrementing a counter variable"}, {"id": "term_19", "type": "mcq", "question": "What is the definition of <b>Minimum</b>?", "options": ["Test data at the very edge of what is allowed (boundary values that should be accepted)", "The smallest value within a set, found by initialising a variable to a large value and comparing", "Checking that data input is reasonable and within set bounds before it is processed", "Working out how many of something there are by incrementing a counter variable"], "correct": 1, "explanation": "The smallest value within a set, found by initialising a variable to a large value and comparing"}, {"id": "term_20", "type": "mcq", "question": "What is the definition of <b>Maximum</b>?", "options": ["Checking that data input is reasonable and within set bounds before it is processed", "The stage where the finished program is checked to ensure it fully works, does not crash, and meets requirements", "The largest value within a set, found by initialising a variable to a small value and comparing", "Test data at the very edge of what is allowed (boundary values that should be accepted)"], "correct": 2, "explanation": "The largest value within a set, found by initialising a variable to a small value and comparing"}, {"id": "term_21", "type": "mcq", "question": "What is the definition of <b>Average (Mean)</b>?", "options": ["Test data on the edge of being accepted and rejected, testing both sides of a limit", "The total of all values divided by the count of values", "The first stage of the life cycle where the problem is explored and requirements are identified", "A structure used to follow an algorithm manually by recording variable values at each step"], "correct": 1, "explanation": "The total of all values divided by the count of values"}, {"id": "term_22", "type": "mcq", "question": "What is the definition of <b>Validation</b>?", "options": ["Checking that data input is reasonable and within set bounds before it is processed", "The process of splitting a problem or system into smaller subproblems or sub-systems", "Test data on the edge of being accepted and rejected, testing both sides of a limit", "A search that checks each item one at a time from the first to the last until the item is found or all items are checked"], "correct": 0, "explanation": "Checking that data input is reasonable and within set bounds before it is processed"}, {"id": "term_23", "type": "mcq", "question": "What is the definition of <b>Range check</b>?", "options": ["The stage where the program is written in a chosen programming language", "A validation check that ensures data is within one or two specified bounds", "A validation check that verifies the number of characters in a string meets requirements", "A structure used to follow an algorithm manually by recording variable values at each step"], "correct": 1, "explanation": "A validation check that ensures data is within one or two specified bounds"}, {"id": "term_24", "type": "mcq", "question": "What is the definition of <b>Length check</b>?", "options": ["A validation check that verifies the number of characters in a string meets requirements", "An algorithm that checks a set of data to find whether a specific value exists", "Test data at the very edge of what is allowed (boundary values that should be accepted)", "Test data on the edge of being accepted and rejected, testing both sides of a limit"], "correct": 0, "explanation": "A validation check that verifies the number of characters in a string meets requirements"}, {"id": "term_25", "type": "mcq", "question": "What is the definition of <b>Type check</b>?", "options": ["A validation check that ensures data is of the correct data type (integer, real, string, Boolean)", "A validation check that ensures data is within one or two specified bounds", "A structured, organised plan used when creating a new computer program, including analysis, design, coding, and testing stages", "A diagram showing how a program is decomposed into subprograms, with the program name at the top and subprograms below"], "correct": 0, "explanation": "A validation check that ensures data is of the correct data type (integer, real, string, Boolean)"}, {"id": "term_26", "type": "mcq", "question": "What is the definition of <b>Presence check</b>?", "options": ["A verification method where data entered is compared to the original by reading and checking", "A check that data has been copied accurately from the original source", "Test data on the edge of being accepted and rejected, testing both sides of a limit", "A validation check that ensures some data has been entered (not null or empty)"], "correct": 3, "explanation": "A validation check that ensures some data has been entered (not null or empty)"}, {"id": "term_27", "type": "mcq", "question": "What is the definition of <b>Format check</b>?", "options": ["A validation check that ensures data is entered in a specific required format", "A validation check that verifies the number of characters in a string meets requirements", "Working out how many of something there are by incrementing a counter variable", "A sorting algorithm that compares adjacent pairs and swaps them if they are in the wrong order, repeatedly passing through the list"], "correct": 0, "explanation": "A validation check that ensures data is entered in a specific required format"}, {"id": "term_28", "type": "mcq", "question": "What is the definition of <b>Check digit</b>?", "options": ["Working out how many of something there are by incrementing a counter variable", "A graphical representation of an algorithm using standard symbols (ovals, diamonds, rectangles, parallelograms)", "The first stage of the life cycle where the problem is explored and requirements are identified", "A digit calculated from a set of numbers and compared after entry to detect data entry errors"], "correct": 3, "explanation": "A digit calculated from a set of numbers and compared after entry to detect data entry errors"}, {"id": "term_29", "type": "mcq", "question": "What is the definition of <b>Verification</b>?", "options": ["A graphical representation of an algorithm using standard symbols (ovals, diamonds, rectangles, parallelograms)", "An algorithm that rearranges data into a specific order (e.g., ascending or descending)", "A check that data has been copied accurately from the original source", "The process of splitting a problem or system into smaller subproblems or sub-systems"], "correct": 2, "explanation": "A check that data has been copied accurately from the original source"}, {"id": "term_30", "type": "mcq", "question": "What is the definition of <b>Visual check</b>?", "options": ["A verification method where data entered is compared to the original by reading and checking", "A validation check that ensures data is within one or two specified bounds", "Checking that data input is reasonable and within set bounds before it is processed", "A search that checks each item one at a time from the first to the last until the item is found or all items are checked"], "correct": 0, "explanation": "A verification method where data entered is compared to the original by reading and checking"}, {"id": "term_31", "type": "mcq", "question": "What is the definition of <b>Double entry check</b>?", "options": ["A graphical representation of an algorithm using standard symbols (ovals, diamonds, rectangles, parallelograms)", "Readable, code-like statements that use keywords and constructs (IF, WHILE, FOR) but are not written to run on a computer", "A verification method where data is entered twice (usually by different people) and checked for differences", "The first stage of the life cycle where the problem is explored and requirements are identified"], "correct": 2, "explanation": "A verification method where data is entered twice (usually by different people) and checked for differences"}, {"id": "term_32", "type": "mcq", "question": "What is the definition of <b>Trace table</b>?", "options": ["A digit calculated from a set of numbers and compared after entry to detect data entry errors", "A graphical representation of an algorithm using standard symbols (ovals, diamonds, rectangles, parallelograms)", "A structured, organised plan used when creating a new computer program, including analysis, design, coding, and testing stages", "A structure used to follow an algorithm manually by recording variable values at each step"], "correct": 3, "explanation": "A structure used to follow an algorithm manually by recording variable values at each step"}, {"id": "term_33", "type": "mcq", "question": "What is the definition of <b>Flowchart</b>?", "options": ["Working out how many of something there are by incrementing a counter variable", "The stage where the program is written in a chosen programming language", "A graphical representation of an algorithm using standard symbols (ovals, diamonds, rectangles, parallelograms)", "A search that checks each item one at a time from the first to the last until the item is found or all items are checked"], "correct": 2, "explanation": "A graphical representation of an algorithm using standard symbols (ovals, diamonds, rectangles, parallelograms)"}, {"id": "term_34", "type": "mcq", "question": "What is the definition of <b>Subprogram</b>?", "options": ["The first stage of the life cycle where the problem is explored and requirements are identified", "A smaller program that is part of a larger program, created through decomposition", "A validation check that ensures some data has been entered (not null or empty)", "A set of step-by-step instructions to solve a problem or complete a task"], "correct": 1, "explanation": "A smaller program that is part of a larger program, created through decomposition"}, {"id": "term_35", "type": "mcq", "question": "What is the definition of <b>Identifier</b>?", "options": ["A digit calculated from a set of numbers and compared after entry to detect data entry errors", "A smaller program that is part of a larger program, created through decomposition", "A verification method where data is entered twice (usually by different people) and checked for differences", "The name given to a variable, constant, or other data item in a program"], "correct": 3, "explanation": "The name given to a variable, constant, or other data item in a program"}, {"id": "term_36", "type": "mcq", "question": "What is the definition of <b>Algorithm</b>?", "options": ["The total of all values divided by the count of values", "The smallest value within a set, found by initialising a variable to a large value and comparing", "A validation check that ensures data is entered in a specific required format", "A set of step-by-step instructions to solve a problem or complete a task"], "correct": 3, "explanation": "A set of step-by-step instructions to solve a problem or complete a task"}], "freeform": [{"id": "qa_0", "type": "freeform", "question": "Write a pseudocode algorithm to find the total and average of 10 numbers input by a user.", "answer": "```\nTotal \u2190 0\nFOR X \u2190 0 TO 9\n    Number \u2190 INPUT(&quot;Enter a number&quot;)\n    Total \u2190 Total + Number\nNEXT X\nAverage \u2190 Total / 10\nOUTPUT &quot;Total: &quot;, Total\nOUTPUT &quot;Average: &quot;, Average\n```", "marks": null}, {"id": "qa_1", "type": "freeform", "question": "Perform a linear search for the number 6 in the following data: 10 5 6 8 1 2. Show each comparison.", "answer": "Compare 10 with 6 \u2014 not the same. Compare 5 with 6 \u2014 not the same. Compare 6 with 6 \u2014 they are the same. The number 6 is found at position 3 (index 2). Three comparisons were needed.", "marks": null}, {"id": "qa_2", "type": "freeform", "question": "A program allows the user to input a number between 1 and 10 (inclusive). Identify test data for each of the four test data types.", "answer": "Normal: any number from 1 to 10 (e.g., 5). Abnormal: a value outside the range or wrong type (e.g., 0, 11, &quot;abc&quot;, 3.5). Extreme: the boundary values that should be accepted (1 and 10). Boundary: values on both sides of each boundary (0 and 1 at the lower end, 10 and 11 at the upper end).", "marks": null}, {"id": "qa_3", "type": "freeform", "question": "Write a pseudocode validation routine using a WHILE loop to input a number and check it is between 1 and 100 inclusive.", "answer": "```\nNumber \u2190 INPUT(&quot;Enter a number between 1 and 100&quot;)\nWHILE Number &lt; 1 OR Number &gt; 100 DO\n    OUTPUT(&quot;Invalid, please try again&quot;)\n    Number \u2190 INPUT(&quot;Enter a number between 1 and 100&quot;)\nENDWHILE\nOUTPUT(&quot;Valid&quot;)\n```", "marks": null}], "truefalse": [{"id": "tf_0", "type": "truefalse", "statement": "How to create a structure diagram:", "correct": true, "explanation": "How to create a structure diagram:"}, {"id": "tf_1", "type": "truefalse", "statement": "Key rules for valid pseudocode:", "correct": true, "explanation": "Key rules for valid pseudocode:"}, {"id": "tf_2", "type": "truefalse", "statement": "Example \u2014 Age input between 10 and 100:", "correct": true, "explanation": "Example \u2014 Age input between 10 and 100:"}, {"id": "tf_3", "type": "truefalse", "statement": "Algorithm (basic version using FOR loop):", "correct": true, "explanation": "Algorithm (basic version using FOR loop):"}, {"id": "tf_4", "type": "truefalse", "statement": "Efficient version (stops when found using WHILE loop):", "correct": true, "explanation": "Efficient version (stops when found using WHILE loop):"}, {"id": "tf_5", "type": "truefalse", "statement": "Version 1 \u2014 Fixed number of passes:", "correct": true, "explanation": "Version 1 \u2014 Fixed number of passes:"}, {"id": "tf_6", "type": "truefalse", "statement": "Version 2 \u2014 Stops when no changes (more efficient):", "correct": true, "explanation": "Version 2 \u2014 Stops when no changes (more efficient):"}, {"id": "tf_7", "type": "truefalse", "statement": "How to create a trace table:", "correct": true, "explanation": "How to create a trace table:"}, {"id": "tf_8", "type": "truefalse", "statement": "Steps to describe an algorithm&#x27;s purpose:", "correct": true, "explanation": "Steps to describe an algorithm&#x27;s purpose:"}, {"id": "tf_9", "type": "truefalse", "statement": "Important: When describing an algorithm, do more than repeat the line of code. Explain what the algorithm achieves, not just how it works line by line.", "correct": true, "explanation": "Important: When describing an algorithm, do more than repeat the line of code. Explain what the algorithm achieves, not just how it works line by line."}, {"id": "tf_10", "type": "truefalse", "statement": "Methods for finding errors:", "correct": true, "explanation": "Methods for finding errors:"}, {"id": "tf_11", "type": "truefalse", "statement": "Flowcharts are graphical representations of algorithms using standard symbols:", "correct": true, "explanation": "Flowcharts are graphical representations of algorithms using standard symbols:"}, {"id": "tf_12", "type": "truefalse", "statement": "Oval/Rounded rectangle \u2014 Start/End (Terminator)", "correct": true, "explanation": "Oval/Rounded rectangle \u2014 Start/End (Terminator)"}, {"id": "tf_13", "type": "truefalse", "statement": "Answer: Compare 10 with 6 \u2014 not the same. Compare 5 with 6 \u2014 not the same. Compare 6 with 6 \u2014 they are the same. The number 6 is found at position 3 (index 2). Three comparisons were needed.", "correct": true, "explanation": "Answer: Compare 10 with 6 \u2014 not the same. Compare 5 with 6 \u2014 not the same. Compare 6 with 6 \u2014 they are the same. The number 6 is found at position 3 (index 2). Three comparisons were needed."}, {"id": "tf_14", "type": "truefalse", "statement": "Answer: This algorithm uses a range check. It validates that the input number is within the range of greater than 0 and less than 100. Any value outside this range is rejected as invalid.", "correct": true, "explanation": "Answer: This algorithm uses a range check. It validates that the input number is within the range of greater than 0 and less than 100. Any value outside this range is rejected as invalid."}]};
+let allQ = [];
+let idx = 0;
+let score = 0;
+let answered = 0;
+
+function init() {
+  allQ = [...(DATA.mcq||[]), ...(DATA.truefalse||[]), ...(DATA.freeform||[])];
+  if (!allQ.length) { document.getElementById('scoreDisplay').textContent = 'No questions available.'; return; }
+  idx = 0; score = 0; answered = 0;
+  renderAll();
+  showQuestion(0);
+}
+
+function renderAll() {
+  const c = document.getElementById('questionsContainer');
+  c.innerHTML = '';
+  allQ.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.id = 'q_' + i;
+
+    let typeLabel = q.type === 'mcq' ? 'Multiple Choice' : q.type === 'truefalse' ? 'True / False' : 'Written Answer';
+    let inner = `<div class="q-number">Question ${i+1} of ${allQ.length}</div>`;
+    inner += `<span class="q-type">${typeLabel}</span>`;
+
+    if (q.type === 'mcq') {
+      inner += `<div class="q-text">${q.question}</div>`;
+      q.options.forEach((o, oi) => {
+        inner += `<button class="option" data-qi="${i}" data-oi="${oi}" onclick="answerMCQ(${i},${oi})">${o}</button>`;
+      });
+      inner += `<div class="explanation" id="expl_${i}">${q.explanation||''}</div>`;
+    } else if (q.type === 'truefalse') {
+      inner += `<div class="q-text">${q.statement}</div>`;
+      inner += `<div class="tf-btns"><button data-qi="${i}" data-val="true" onclick="answerTF(${i},true)">True</button>`;
+      inner += `<button data-qi="${i}" data-val="false" onclick="answerTF(${i},false)">False</button></div>`;
+      inner += `<div class="explanation" id="expl_${i}">Correct statement: ${q.explanation||''}</div>`;
+    } else {
+      inner += `<div class="q-text">${q.question}</div>`;
+      inner += `<textarea class="freeform-area" id="ans_${i}" placeholder="Type your answer..."></textarea>`;
+      inner += `<div class="explanation" id="expl_${i}"><b>Model answer:</b> ${q.answer||''}</div>`;
+    }
+
+    inner += `<div class="nav-btns">`;
+    if (q.type === 'freeform') inner += `<button class="btn-reveal" onclick="revealFreeform(${i})">Show Answer</button>`;
+    else inner += `<span></span>`;
+    inner += `<button class="btn-next" id="next_${i}" onclick="nextQ()">${i===allQ.length-1?'Finish':'Next →'}</button>`;
+    inner += `</div>`;
+
+    card.innerHTML = inner;
+    c.appendChild(card);
+  });
+}
+
+function showQuestion(n) {
+  document.querySelectorAll('.question-card').forEach(c => c.classList.remove('active'));
+  const card = document.getElementById('q_' + n);
+  if (card) card.classList.add('active');
+  document.getElementById('progressFill').style.width = ((n+1)/allQ.length*100) + '%';
+  document.getElementById('scoreDisplay').textContent = `Question ${n+1} of ${allQ.length} · Score: ${score}/${answered}`;
+}
+
+function answerMCQ(qi, oi) {
+  const q = allQ[qi];
+  const btns = document.querySelectorAll(`button[data-qi="${qi}"]`);
+  btns.forEach(b => { b.disabled = true; b.classList.remove('selected'); });
+  btns[oi].classList.add('selected');
+  if (oi === q.correct) { btns[oi].classList.add('correct'); score++; }
+  else { btns[oi].classList.add('wrong'); btns[q.correct].classList.add('correct'); }
+  answered++;
+  document.getElementById('expl_' + qi).classList.add('show');
+  document.getElementById('scoreDisplay').textContent = `Question ${qi+1} of ${allQ.length} · Score: ${score}/${answered}`;
+}
+
+function answerTF(qi, val) {
+  const q = allQ[qi];
+  const btns = document.querySelectorAll(`button[data-qi="${qi}"]`);
+  btns.forEach(b => b.disabled = true);
+  const correct = val === q.correct;
+  btns.forEach(b => {
+    if (String(b.dataset.val) === String(q.correct)) b.classList.add('correct');
+    if (b.dataset.val === String(val) && !correct) b.classList.add('wrong');
+  });
+  if (correct) score++;
+  answered++;
+  document.getElementById('expl_' + qi).classList.add('show');
+  document.getElementById('scoreDisplay').textContent = `Question ${qi+1} of ${allQ.length} · Score: ${score}/${answered}`;
+}
+
+function revealFreeform(qi) {
+  document.getElementById('expl_' + qi).classList.add('show');
+  answered++;
+  document.getElementById('scoreDisplay').textContent = `Question ${qi+1} of ${allQ.length} · Score: ${score}/${answered}`;
+}
+
+function nextQ() {
+  idx++;
+  if (idx >= allQ.length) { showResults(); return; }
+  showQuestion(idx);
+}
+
+function showResults() {
+  document.querySelectorAll('.question-card').forEach(c => c.classList.remove('active'));
+  const pct = answered > 0 ? Math.round(score/answered*100) : 0;
+  document.getElementById('finalScore').textContent = pct + '%';
+  let grade = pct >= 90 ? 'Outstanding!' : pct >= 70 ? 'Great work!' : pct >= 50 ? 'Good effort — keep studying!' : 'Review the material and try again.';
+  document.getElementById('gradeText').textContent = grade + ` (${score}/${answered} correct)`;
+  document.getElementById('resultsCard').style.display = 'block';
+  document.getElementById('progressFill').style.width = '100%';
+  // Save to localStorage for dashboard
+  try {
+    const sessions = JSON.parse(localStorage.getItem('sf_quiz_sessions') || '[]');
+    sessions.push({ date: new Date().toISOString(), score, total: answered, pct });
+    localStorage.setItem('sf_quiz_sessions', JSON.stringify(sessions));
+  } catch(e) {}
+}
+
+function restart() {
+  document.getElementById('resultsCard').style.display = 'none';
+  init();
+}
+
+init();
+</script>
+</body>
+</html>
